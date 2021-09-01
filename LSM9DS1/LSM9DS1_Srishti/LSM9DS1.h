@@ -57,5 +57,30 @@
 #define INT_GEN_THS_ZL_G 	0x36
 #define INT_GEN_DUR_G 		0x37
 
+//Variables to store sensor data
+
+//accelerometer data
+uint16_t Ax, Ay, Az;
+
+//Read value of a particular register
+uint8_t read_reg(uint8_t address);	
+
+//Write value to a particular register
+void write_reg(uint8_t address, uint8_t value);
+
+//Initialize accelerometer, set up scale and output rate
+void acc_init();
+
+//Polls the accelerometer status register to check if data available
+uint8_t acc_data_available();
+
+//Reads accelerometer output registers, stores values in Ax, Ay, Az
+void read_acc();
+
+//Reads a specific axis of the accelerometer
+uint16_t read_acc_axis();
+
+//Converts the 16 bit accelerometer output data to g's
+float convert_acc_data(uint16_t acc_data);
 
 #endif
