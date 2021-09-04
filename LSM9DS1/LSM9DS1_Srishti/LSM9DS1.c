@@ -4,6 +4,25 @@
 #include <math.h>
 #include <stdio.h>
 #include "LSM9DS1.h"
+#include "I2C.h"
+
+uint8_t read_reg(uint8_t address){
+	uint8_t temp;
+	I2C_Init();
+	configure_acc(SADW,address);
+	I2C_Repeated_Start(SADR);
+	temp=I2C_Read_Ack;
+	I2C_Stop();
+	return temp;
+	
+}
+
+void write_reg(uint8_t address, uint8_t value){
+	I2C_Init();
+	configure_acc(SADW,address);
+	I2C_Write(value);
+	I2C_Stop();
+}
 
 void acc_init(){
 	
