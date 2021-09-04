@@ -19,17 +19,17 @@ uint8_t I2C_Start(char write_address)						/* I2C start function */
 	while (!(TWCR & (1<<TWINT)));							/* Wait until TWI finish its current job (start condition) */
 	status = TWSR & 0xF8;									/* Read TWI status register with masking lower three bits */
 	if (status != START)								    /* Check whether start condition transmitted successfully or not */
-	return 0;												/* If not then return 0 to indicate start condition fail */
+		return 0;												/* If not then return 0 to indicate start condition fail */
 	TWDR = write_address;									/* If yes then write SLA+W in TWI data register */
 	TWCR = (1<<TWEN)|(1<<TWINT);							/* Enable TWI and clear interrupt flag */
 	while (!(TWCR & (1<<TWINT)));							/* Wait until TWI finish its current job (Write operation) */
 	status = TWSR & 0xF8;									/* Read TWI status register with masking lower three bits */
 	if (status == MT_SLA_ACK)							    /* Check whether SLA+W transmitted & ACK received or not? */
-	return 1;												/* If yes then return 1 to indicate ACK received i.e. ready to accept data byte */
+		return 1;												/* If yes then return 1 to indicate ACK received i.e. ready to accept data byte */
 	if (status == MT_SLA_NACK)								/* Check whether SLA+W transmitted & NACK received or not? */
-	return 2;												/* If yes then return 2 to indicate NACK received i.e. device is busy */
+		return 2;												/* If yes then return 2 to indicate NACK received i.e. device is busy */
 	else
-	return 3;												/* Else return 3 to indicate SLA+W failed */
+		return 3;												/* Else return 3 to indicate SLA+W failed */
 }
 
 uint8_t I2C_Repeated_Start(char read_address)				/* I2C repeated start function */
@@ -39,23 +39,23 @@ uint8_t I2C_Repeated_Start(char read_address)				/* I2C repeated start function 
 	while (!(TWCR & (1<<TWINT)));							/* Wait until TWI finish its current job (start condition) */
 	status = TWSR & 0xF8;									/* Read TWI status register with masking lower three bits */
 	if (status != REPEATED_START)							/* Check whether repeated start condition transmitted successfully or not? */
-	return 0;												/* If no then return 0 to indicate repeated start condition fail */
+		return 0;												/* If no then return 0 to indicate repeated start condition fail */
 	TWDR = read_address;									/* If yes then write SLA+R in TWI data register */
 	TWCR = (1<<TWEN)|(1<<TWINT);							/* Enable TWI and clear interrupt flag */
 	while (!(TWCR & (1<<TWINT)));							/* Wait until TWI finish its current job (Write operation) */
 	status = TWSR & 0xF8;									/* Read TWI status register with masking lower three bits */
 	if (status == MR_SLA_ACK)								/* Check whether SLA+R transmitted & ack received or not? */
-	return 1;												/* If yes then return 1 to indicate ack received */
+		return 1;												/* If yes then return 1 to indicate ack received */
 	if (status == MR_SLA_NACK)								/* Check whether SLA+R transmitted & nack received or not? */
-	return 2;												/* If yes then return 2 to indicate nack received i.e. device is busy */
+		return 2;												/* If yes then return 2 to indicate nack received i.e. device is busy */
 	else
-	return 3;												/* Else return 3 to indicate SLA+W failed */
+		return 3;												/* Else return 3 to indicate SLA+W failed */
 }
 
 void I2C_Stop()												/* I2C stop function */
 {
 	TWCR=(1<<TWSTO)|(1<<TWINT)|(1<<TWEN);					/* Enable TWI, generate stop condition and clear interrupt flag */
-	while(TWCR & (1<<TWSTO));								/* Wait until stop condition execution */
+	while(!(TWCR & (1<<TWSTO)));								/* Wait until stop condition execution */
 }
 
 void I2C_Start_Wait(char write_address)						/* I2C start wait function */
@@ -67,7 +67,7 @@ void I2C_Start_Wait(char write_address)						/* I2C start wait function */
 		while (!(TWCR & (1<<TWINT)));						/* Wait until TWI finish its current job (start condition) */
 		status = TWSR & 0xF8;								/* Read TWI status register with masking lower three bits */
 		if (status != START)									/* Check whether start condition transmitted successfully or not? */
-		continue;											/* If no then continue with start loop again */
+			continue;											/* If no then continue with start loop again */
 		TWDR = write_address;								/* If yes then write SLA+W in TWI data register */
 		TWCR = (1<<TWEN)|(1<<TWINT);						/* Enable TWI and clear interrupt flag */
 		while (!(TWCR & (1<<TWINT)));						/* Wait until TWI finish its current job (Write operation) */
@@ -89,11 +89,11 @@ uint8_t I2C_Write(char data)								/* I2C write function */
 	while (!(TWCR & (1<<TWINT)));							/* Wait until TWI finish its current job (Write operation) */
 	status = TWSR & 0xF8;									/* Read TWI status register with masking lower three bits */
 	if (status == MT_DATA_ACK)								/* Check whether data transmitted & ACK received or not? */
-	return 0;												/* If yes then return 0 to indicate ACK received */
+		return 0;												/* If yes then return 0 to indicate ACK received */
 	if (status == MT_DATA_NACK)								/* Check whether data transmitted & NACK received or not? */
-	return 1;												/* If yes then return 1 to indicate NACK received */
+		return 1;												/* If yes then return 1 to indicate NACK received */
 	else
-	return 2;												/* Else return 2 to indicate data transmission failed */
+		return 2;												/* Else return 2 to indicate data transmission failed */
 }
 
 char I2C_Read_Ack()											/* I2C read ACK function */
@@ -112,29 +112,21 @@ char I2C_Read_Nack()										/* I2C read NACK function */
 
 uint8_t configure_acc(char SLA, char SUB){
 	
-	uint8_t status;											/* Declare variable */
-	TWCR = (1<<TWSTA)|(1<<TWEN)|(1<<TWINT);					/* Enable TWI, generate start condition and clear interrupt flag */
-	while (!(TWCR & (1<<TWINT)));							/* Wait until TWI finish its current job (start condition) */
-	status = TWSR & 0xF8;									/* Read TWI status register with masking lower three bits */
-	if (status != START)								    /* Check whether start condition transmitted successfully or not */
-	return 0;												/* If not then return 0 to indicate start condition fail */
-	TWDR = SLA;									            /* If yes then write SLA+W in TWI data register */
-	TWCR = (1<<TWEN)|(1<<TWINT);							/* Enable TWI and clear interrupt flag */
-	while (!(TWCR & (1<<TWINT)));							/* Wait until TWI finish its current job (Write operation) */
-	status = TWSR & 0xF8;									/* Read TWI status register with masking lower three bits */
-	if (status == MT_SLA_NACK)								/* Check whether SLA+W transmitted & NACK received or not? */
-	return 2;												/* If yes then return 2 to indicate NACK received i.e. device is busy */
-	else if (status == MT_SLA_ACK)							/* Check whether SLA+W transmitted & ACK received or not? */
-	TWDR = SUB;										        /* If yes then write SUB in TWI data register */
-	TWCR = (1<<TWEN)|(1<<TWINT);							/* Enable TWI and clear interrupt flag */
-	while (!(TWCR & (1<<TWINT)));							/* Wait until TWI finish its current job (Write operation) */
-	status = TWSR & 0xF8;									/* Read TWI status register with masking lower three bits */
-	if (status == MT_DATA_ACK)							    /* Check whether SUB transmitted & ACK received or not? */
-	return 3;											    /* If yes then return 3 to indicate SUB successfully transmitted*/
-	else if (status == MT_DATA_NACK)						/* Check whether SUB transmitted & NACK received or not? */
-	return 4;												/* If yes then return 4 to indicate NACK received i.e. device is busy */
+	uint8_t start = I2C_Start(SLA);
+	if(start == 1)											/* Start I2C */
+	{
+		TWDR = SUB;										        /* If yes then write SUB in TWI data register */
+		TWCR = (1<<TWEN)|(1<<TWINT);							/* Enable TWI and clear interrupt flag */
+		while (!(TWCR & (1<<TWINT)));							/* Wait until TWI finish its current job (Write operation) */
+		status = TWSR & 0xF8;									/* Read TWI status register with masking lower three bits */
+		if (status == MT_SLA_ACK)							    /* Check whether SUB transmitted & ACK received or not? */
+			return 4;											    /* If yes then return 4 to indicate SUB successfully transmitted*/
+		else if (status == MT_SLA_NACK)						/* Check whether SUB transmitted & NACK received or not? */
+			return 5;												/* If yes then return 5 to indicate NACK received i.e. device is busy */
+		else
+			return 6;										    /* Transmission failed*/
+	}
 	
-	else return 5;										    /* Transmission failed*/
-		
+	return start;										/* Start Condition failed */
 }
 
