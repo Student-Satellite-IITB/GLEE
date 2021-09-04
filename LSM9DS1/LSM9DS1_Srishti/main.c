@@ -6,24 +6,20 @@
 #include <math.h>
 #include <stdio.h>
 #include "I2C.c"
-#include "LSM9DS1.h"
+#include "LSM9DS1.c"
 
 int main(void)
 {
-   char sensor_data;
+   uint8_t data_available= acc_data_available();
+   					
+   acc_init();								//Initialize Accelerometer
    
-   I2C_Init();								//Initialize I2C 
-   char reg_addr = 0x6B;			        //8 bit sub-address
-   configure_acc(SADW,reg_addr);			
-   
-   while(1)
-   {
-	   I2C_Repeated_Start(SADR);
-	   sensor_data=I2C_Read_Ack();
+   while(1){
+	   
+	   if(data_available) {
+		   read_acc(); 						//Acc data gets stored in Ax, Ay, Az
+	   }
    }
-   
-   I2C_Stop();
-   
    
 }
 
