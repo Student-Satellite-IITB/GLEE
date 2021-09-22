@@ -30,12 +30,27 @@ void acc_init(){
 	write_reg(CTRL_REG6_XL,0x20);		//Output Data Rate=10 Hz, full scale deflection=2g
 }
 
+void FIFO_init(){
+	
+	write_reg(CTRL_REG9, 0x02);			//FIFO Memory enable
+	write_reg(FIFO_CTRL,0x3F);			//FIFO Mode on
+}
+
 uint8_t acc_data_available(){
 	
 	uint8_t status = read_reg(STATUS_REG1);
 	
 	if(status&(1<<0)) return 1;			//Returns 1 if new data available, else returns 0
 	else return 0;
+}
+
+uint8_t acc_data_available_FIFO(){
+	
+	uint8_t status = read_reg(FIFO_SRC);
+	
+	if(status==0xE0) return 1;
+	else return 0;
+	
 }
 
 void read_acc(){
