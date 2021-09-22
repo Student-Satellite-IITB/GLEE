@@ -71,8 +71,14 @@ void write_reg(uint8_t address, uint8_t value);
 //Initialize accelerometer, set up scale and output rate
 void acc_init();
 
+//Initialize FIFO Mode
+void FIFO_init();
+
 //Polls the accelerometer status register to check if data available
 uint8_t acc_data_available();
+
+//Polls the accelerometer status register to check if FIFO data available
+uint8_t acc_data_available_FIFO();
 
 //Reads accelerometer output registers, stores values in Ax, Ay, Az
 void read_acc();
