@@ -87,6 +87,12 @@
 //accelerometer data
 uint16_t Ax, Ay, Az;
 
+//gyroscope data
+uint16_t Gx, Gy, Gz;
+
+//magnetometer data
+uint16_t Mx, My, Mz;
+
 //Read value of a particular register
 uint8_t read_reg(uint8_t address);
 
