@@ -33,7 +33,13 @@ void acc_init(){
 void FIFO_init(){
 	
 	write_reg(CTRL_REG9, 0x02);			//FIFO Memory enable
-	write_reg(FIFO_CTRL,0x3F);			//FIFO Mode on
+	write_reg(FIFO_CTRL,0x3F);			//FIFO Mode on, FIFO_CTRL=00100000
+}
+
+void Cont_init(){
+	
+	write_reg(CTRL_REG9, 0x02);			//FIFO Memory enable
+	write_reg(FIFO_CTRL,0xC0);			//Continuous Mode on, FIFO_CTRL=11000000
 }
 
 uint8_t acc_data_available(){
@@ -44,7 +50,7 @@ uint8_t acc_data_available(){
 	else return 0;
 }
 
-uint8_t acc_data_available_FIFO(){
+uint8_t FIFO_full(){
 	
 	uint8_t status = read_reg(FIFO_SRC);
 	
@@ -58,4 +64,14 @@ void read_acc(){
 	Ax=(read_reg(OUT_X_H_XL)<<8)|(read_reg(OUT_X_L_XL));
 	Ay=(read_reg(OUT_Y_H_XL)<<8)|(read_reg(OUT_Y_L_XL));
 	Az=(read_reg(OUT_Z_H_XL)<<8)|(read_reg(OUT_Z_L_XL));
+}
+
+void read_FIFO_buffer(){
+	
+	if(FIFO_full){
+		for(int i=0;i<32;i++){
+			read_acc(); 						//Acc data gets stored in Ax, Ay, Az
+			_delay_ms(100);						//Rate of reading data from FIFO to be decided
+		}
+	}
 }

@@ -10,23 +10,16 @@
 
 int main(void)
 {
-   uint8_t data_available= acc_data_available();
-  /*uint8_t data_available= acc_data_available_FIFO();*/                //Incase FIFO Mode is used
-   
+	uint8_t data_available= acc_data_available();
 	
-   					
-   acc_init();								//Initialize Accelerometer
-   /*FIFO_init()*/
-   
-   while(1){
-	   
-	   if(data_available) {
-		   /* for(int i=0;i<32;i++){*/
+	acc_init();							//Initialize Accelerometer
+	
+	while(1){
+		
+		if(data_available) {
 		   read_acc(); 						//Acc data gets stored in Ax, Ay, Az
-		   _delay_ms(100);
-		  /* }*/
-	   }
-   }
-   
+	   	}
+	}
+	
 }
 

@@ -99,14 +99,20 @@ void acc_init();
 //Initialize FIFO Mode
 void FIFO_init();
 
+//Initialize Cont Mode
+void Cont_init();
+
 //Polls the accelerometer status register to check if data available
 uint8_t acc_data_available();
 
-//Polls the accelerometer status register to check if FIFO data available
-uint8_t acc_data_available_FIFO();
+//Polls the accelerometer status register to check if FIFO full
+uint8_t FIFO_full();
 
 //Reads accelerometer output registers, stores values in Ax, Ay, Az
 void read_acc();
+
+//Reads data from FIFO buffer once FIFO is full (continuous mode)
+void read_FIFO_buffer();
 
 //Reads a specific axis of the accelerometer
 uint16_t read_acc_axis();
