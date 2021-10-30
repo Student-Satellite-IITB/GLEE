@@ -10,14 +10,15 @@
 
 int main(void)
 {
+	uint8_t data_available= acc_data_available();
 	
 	acc_init();							//Initialize Accelerometer
-	//FIFO_init();
-	Cont_init();							//Initialize continuous mode for FIFO buffer
 	
 	while(1){
 		
-		read_FIFO_buffer();
+		if(data_available) {
+		   read_acc(); 						//Acc data gets stored in Ax, Ay, Az
+	   	}
 	}
 	
 }
