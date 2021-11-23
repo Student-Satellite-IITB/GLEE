@@ -77,6 +77,9 @@ void FIFO_init();
 //Initialize Cont Mode
 void Cont_init();
 
+//Configures interrupts in Accelerometer
+void configure_interrupt();
+
 //Polls the accelerometer status register to check if data available
 uint8_t acc_data_available();
 
