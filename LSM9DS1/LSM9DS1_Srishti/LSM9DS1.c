@@ -33,13 +33,13 @@ void acc_init(){
 void FIFO_init(){
 	
 	write_reg(CTRL_REG9, 0x02);			//FIFO Memory enable
-	write_reg(FIFO_CTRL,0x3F);			//FIFO Mode on, FIFO_CTRL=00100000
+	write_reg(FIFO_CTRL,0x3F);			//FIFO Mode on, FIFO_CTRL=00111111
 }
 
 void Cont_init(){
 	
 	write_reg(CTRL_REG9, 0x02);			//FIFO Memory enable
-	write_reg(FIFO_CTRL,0xC0);			//Continuous Mode on, FIFO_CTRL=11000000
+	write_reg(FIFO_CTRL,0xDF);			//Continuous Mode on, FIFO_CTRL=11011111
 }
 
 uint8_t acc_data_available(){
@@ -48,6 +48,11 @@ uint8_t acc_data_available(){
 	
 	if(status&(1<<0)) return 1;			//Returns 1 if new data available, else returns 0
 	else return 0;
+}
+
+void configure_interrupt(){
+	
+	write_reg(INT1_CTRL, 0x08);			//generates interrupt when 32 unread samples in FIFO, INT1_FTH=1
 }
 
 uint8_t FIFO_full(){
