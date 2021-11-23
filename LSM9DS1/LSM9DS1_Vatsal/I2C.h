@@ -25,4 +25,5 @@ uint8_t I2C_Write(char data);
 char I2C_Read_Ack();
 char I2C_Read_Nack();
 uint8_t configure_acc(char SLA, char SUB);
+void enableExternalInterrupts();
 #endif

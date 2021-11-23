@@ -129,3 +129,16 @@ uint8_t configure_acc(char SLA, char SUB){
 	
 	return start;										/* Start Condition failed */
 }
+
+
+void enableExternalInterrupts(){
+	
+	PORTD = (1<<2) | (1<<3);					//set INT0 and INT1 high
+		
+	EIMSK = (1<<1) | (1<<0);					//enable external interrupts
+		
+	EICRA = (0<<3) | (1<<2) | (0<<1) | (1<<0);	//Any logical change on INT0 and INT1 will enable interrupt
+		
+	sei();										//enable global interrupts
+		
+}

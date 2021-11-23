@@ -5,7 +5,7 @@
 #define SADW  0xD4
 #define SADR  0xD5
 
-// Acc. and Gyro. Registers Address
+// Accelerometer and Gyro. Registers Address
 #define ACT_THS 			0x04
 #define ACT_DUR 			0x05
 #define INT_GEN_CFG_XL 		0x06
@@ -113,5 +113,19 @@ uint16_t read_acc_axis();
 
 //Converts the 16 bit accelerometer output data to g's
 float convert_acc_data(uint16_t acc_data);
+
+void gyro_init();
+void read_gyro();
+uint8_t gyro_data_available();
+void reset_FIFO_mode();
+void FIFO_mode();
+void continuous_mode();
+void contin_to_FIFO_mode();
+void bypass_to_contin_mode();
+void magneto_init();
+void read_magneto();
+uint8_t magneto_data_available();
+void enableSensorInterrupts();
+
 
 #endif

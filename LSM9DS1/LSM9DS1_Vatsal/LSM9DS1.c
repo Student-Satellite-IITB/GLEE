@@ -26,15 +26,16 @@ void write_reg(uint8_t address, uint8_t value){
 
 void acc_init(){
 	
-	write_reg(CTRL_REG5_XL,0x38);		//Accelerometer X,Y,Z output enable
-	write_reg(CTRL_REG6_XL,0x20);		//Output Data Rate=10 Hz, full scale deflection=2g
+	write_reg(CTRL_REG5_XL,0x38);		// Accelerometer X,Y,Z output enable
+	write_reg(CTRL_REG6_XL,0x20);		// Output Data Rate=10 Hz, full scale deflection=2g
+	
 }
 
 uint8_t acc_data_available(){
 	
 	uint8_t status = read_reg(STATUS_REG1);
 	
-	if(status&(1<<0)) return 1;			//Returns 1 if new data available, else returns 0
+	if(status&(1<<0)) return 1;			// Returns 1 if new data available, else returns 0
 	else return 0;
 }
 
@@ -101,6 +102,7 @@ void continuous_mode(){
 	
 }
 
+// left to complete
 void contin_to_FIFO_mode(){
 	
 	write_reg(FIFO_CTRL, 0x7F);								// Set continuous to FIFO mode, threshold level 31
@@ -109,7 +111,7 @@ void contin_to_FIFO_mode(){
 	write_reg(INT_GEN_SRC_XL, 0x00);						// FIFO in Continuous mode - 0
 }
 
-
+// left to complete
 void bypass_to_contin_mode(){
 	
 	write_reg(FIFO_CTRL, 0x9F);								// Set continuous to FIFO mode, threshold level 31
@@ -128,17 +130,40 @@ void magneto_init(){
 	write_reg(CTRL_REG3_M, 0x81);							// Enable I2C, SPI only write enabled, Single Conversion operating mode 
 }
 
-void read_gyro(){
+void read_magneto(){
 	
 	Mx = (uint16_t) ((uint16_t)read_reg(OUT_X_H_M)<<8) | (read_reg(OUT_X_L_M));
 	My = (uint16_t) ((uint16_t)read_reg(OUT_Y_H_M)<<8) | (read_reg(OUT_Y_L_M));
 	Mz = (uint16_t) ((uint16_t)read_reg(OUT_Z_H_M)<<8) | (read_reg(OUT_Z_L_M));
 }
 
-uint8_t gyro_data_available(){
+uint8_t magneto_data_available(){
 	
 	uint8_t status = read_reg(STATUS_REG_M);
 	
 	if(status&(1<<3)) return 1;			//Returns 1 if new data available in x,y,z axis, else returns 0
 	else return 0;
+}
+
+
+// external interrupts sensor routine
+
+void enableSensorInterrupts(){
+	
+	write_reg(INT_GEN_CFG_XL, 0x3F);	//Enable Interrupt generation for all x, y, z axis(high, low)
+	write_reg(INT_GEN_THS_X_XL, 0xFF);	//X-axis interrupt threshold at max value
+	write_reg(INT_GEN_THS_Y_XL, 0xFF);	//Y-axis interrupt threshold at max value
+	write_reg(INT_GEN_THS_Z_XL, 0xFF);	//Z-axis interrupt threshold at max value
+	
+}
+
+ISR(INT0_vect){
+	
+	for(int i=0;i<32;i++){
+		read_acc(); 					//Read acc data
+	}
+}
+
+ISR(INT1_vect){
+	
 }
