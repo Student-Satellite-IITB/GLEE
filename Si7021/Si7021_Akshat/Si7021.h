@@ -25,17 +25,19 @@
 #define SI7021_READ_HEATER_CR    0x11                         // Read Heater Control Register
 #define SI7021_READ_ID1          0xFA                         // Read 1st byte of electronic ID
 #define SI7021_READ_ID2          0xFC                         // Read 2nd byte of electronic ID
-#define SI7021_READ_FIRM_REV     0x84                         // Read firmware revision version
+#define SI7021_READ_FIRM_REV_1     0x84                         // Read firmware revision version
+#define SI7021_READ_FIRM_REV_2     0xB8                         // Read firmware revision version
 
 //Sensor functions
 uint8_t readElecID();                                         // To read electronic ID (pending)
-uint8_t measurement(uint8_t cmd);                                            // To make measurement (pending)
-uint8_t getRH(bool hold);                                              // To read Relative Humidity value (pending)
-uint8_t getTemperature(bool hold);                                     // To read Temperature value (pending)
+uint8_t readFirmRev();
+uint16_t measurement(uint8_t cmd);                             // To make measurement (pending)
+uint16_t getRH(uint8_t hold);                                     // To read Relative Humidity value (pending)
+uint8_t getTemperature(uint8_t hold);                            // To read Temperature value (pending)
+uint8_t getPrevTemp(uint8_t hold);                                        // To read temperature that was measured along with RH
 void reset();                                                 // To reset the sensor (pending)
 void enableHeater();                                          // To enable or disable heater (pending)
 void heaterLevel();                                           // To set heater level (pending)
-
 
 
 #endif /* SI7021_H_ */
