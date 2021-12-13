@@ -1,6 +1,7 @@
 # GLEE
 ## Spectroscopy Payload
 **Aim -** To validate the presence of minerals in the lunar regolith through gamma ray or x-ray spectroscopy.
+
 **Tasks:**
 - Designing a capable spectroscopy system
 - Testing the precision of spectral lines
