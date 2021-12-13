@@ -8,7 +8,7 @@
 - Modelling known sources of radiation and their spectrum
 - Data analysis and inference
 ### Circuit Design
-![image](https://drive.google.com/file/d/1RqPNKHk5Ifv1zABLLwpWyxfyJ1z84gqp/view?usp=sharing)
+![image](/assets/images/Overall Circuit.png)
 
 
 
