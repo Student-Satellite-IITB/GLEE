@@ -41,10 +41,13 @@ The preamplifier basically consists of an Opamp, a pair of capacitors and a disc
 Count rate of a radiation for any sensor refers to the number of photons belonging to the energy range of that radiation that are hitting the sensor in a second.
 - Count rate of X-rays =
 - Count rate of Gamma rays =
-The time constant for the CSP has to be lesser than the one-fifth of the maximum count rate possible. for the CSP designed by us-
+
+The time constant for the CSP has to be lesser than the one-fifth of the maximum count rate possible. For the CSP designed by us-
 - Feedback Resistance (R) =
 - Feedback Capacitance (C) =
 - Time Constant (RC) =
 
 Another possible alternative to this RF CSP would have been the transistor reset pre-amplifier, but it was rejected due to excessively complicated circuitry, higher power & size as compared to RF CSP and no significant benefits other than slight reduced noise.
 
+### Pulse Shaper Circuit
+The photo
