@@ -64,3 +64,9 @@ The COTS components that we can use to build our Pulse Shaper :
 - UA741 : https://www.ti.com/document-viewer/UA741/datasheet/features-slos0946106#SLOS0946106
 - LM310 : https://circuits-diy.com/wp-content/uploads/2021/01/LM310N.pdf
 - OP07 : https://www.ti.com/document-viewer/OP07/datasheet
+
+
+### Baseline Restorer & Pole-Zero Cancellation
+The Baseline restorer and pole-zero cancellation are not independent components but are additions to the pulse shaper in order to tackle the issues arising from the non idealities in the opamps that may lead to baseline shift, which is a constant offset voltage in addition to the required signal or it may cause ringing that leads to the signal not being able to reach a fixed value and keep oscillating around it.
+
+to tackle such issues we have implemented these two corrective measures. The Pole zero restoration has been implemented alongside the differentiator with an extra resistance being added parallely to the capacitor there, meanwhile the baseline restorer requires an Opamp that  provides a negative feedbacks to any constant voltage present in the output signal and thus reducing it to zero. 
