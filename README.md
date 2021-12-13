@@ -19,7 +19,10 @@ The Circuit Consists of the following parts-
 - Multi-Channel Analyzer
 
 ### Diode Sensor
-After going through the size,power and response rates, 2 photodiode detectors were finalized:
+
+The X-rays and gamma rays coming from Sun, hit the lunar surface and are reflected by the lunar regolith. The photons from the reflected rays hit our sensor and produce a surge in the reverse current. The magnitude of this surge is used to estimate the composition of the lunar soil (regolith). We have decided to use photodiode sensors for the the task due to lower power consumption and small size as compared to other detectors
+
+After going through the response rates of various diodes, the following 2 photodiode detectors were finalized:
 - UM 9441: https://www.microsemi.com/existing-parts/parts/82558#resources
 - X1007: https://www.mouser.in/datasheet/2/313/FirstSensor_09202018_X100-7_SMD_501401-1483097.pdf
 
