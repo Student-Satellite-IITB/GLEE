@@ -39,7 +39,7 @@ The next component in our system is the charge sensitive preamplifier, its task 
 The preamplifier basically consists of an Opamp, a pair of capacitors and a discharging mechanism. The CSP needs to regularly discharged in order to prevent it from getting saturated and/or saturating the final diode. We are using a resistance feedback CSP which uses the feedback resistance of the opamp to continously discharge the capacitor. The output voltage of this CSP is a **pulse train of exponential signals**. The height of each signal is directly propotional to the energy of the incident photons and time constant for this exponential signal is as per the values of feedback resistance and capacitance. The values of our feedback components are based on the count rate of the radiation. 
 
 Count rate of a radiation for any sensor refers to the number of photons belonging to the energy range of that radiation that are hitting the sensor in a second.
-- Count rate of X-rays =
+- Count rate of X-rays = 
 - Count rate of Gamma rays =
 
 The time constant for the CSP has to be lesser than the one-fifth of the maximum count rate possible. For the CSP designed by us-
@@ -51,7 +51,7 @@ Another possible alternative to this RF CSP would have been the transistor reset
 
 Present COTS Opamp Models shortlisted for CSP-
 - OPA656 : https://www.ti.com/document-viewer/OPA656/datasheet
-- LMH6626 :
+- LMH6626 : https://www.ti.com/document-viewer/LMH6626/datasheet
 
 ### Pulse Shaper Circuit
 The sensor is susceptible to noise and various forms of disturbances that cause deformation in the signal, therefore the signal needs to be filtered before it is sent to the amplifier in order to prevent amplification of unnecessary noise. The Pulse Shaper is basically a bandpass filter responsible for removing both the low and high frequency noises along with shaping the voltage signal in order to allow easier amplification and digitization. The input of the Pulse shaper is an **exponential voltage signal** obtained from CSP and the output is an **Gaussian voltage pulse**. A Gaussian shape minimizes the noise along with allowing easier digitization.
