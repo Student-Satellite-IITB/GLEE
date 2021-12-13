@@ -25,5 +25,6 @@ After going through the size,power and response rates, 2 photodiode detectors we
 
 While UM9441 is a radiation hardened diode, X1007 has prior spectroscopy usage. Both diodes need to have a reverse biased voltage of around 30 V in order to act as photodiode. 
 The output voltage from the GLEE solar panel is expected to be 5 V, hence a boost convertor would be required to step up the voltage from 5 V to 30 V.
-Selected Boost Convertor: TPS6104x-Q1  (https://www.ti.com/document-viewer/TPS61041-Q1/datasheet)
+
+Selected Boost Convertor: TPS6104x-Q1  (https://www.ti.com/document-viewer/TPS61041-Q1/datasheet).
 This boost convertor can step up voltage from 5 V to 28 V with an efficiency of 85 %
