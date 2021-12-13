@@ -1,3 +1,3 @@
 # GLEE
 ## Spectroscopy Payload
-\textbf{Aim}-
+**Aim - **
