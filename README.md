@@ -49,5 +49,18 @@ The time constant for the CSP has to be lesser than the one-fifth of the maximum
 
 Another possible alternative to this RF CSP would have been the transistor reset pre-amplifier, but it was rejected due to excessively complicated circuitry, higher power & size as compared to RF CSP and no significant benefits other than slight reduced noise.
 
+Present COTS Opamp Models shortlisted for CSP-
+- OPA656 : https://www.ti.com/document-viewer/OPA656/datasheet
+- LMH6626 :
+
 ### Pulse Shaper Circuit
-The photo
+The sensor is susceptible to noise and various forms of disturbances that cause deformation in the signal, therefore the signal needs to be filtered before it is sent to the amplifier in order to prevent amplification of unnecessary noise. The Pulse Shaper is basically a bandpass filter responsible for removing both the low and high frequency noises along with shaping the voltage signal in order to allow easier amplification and digitization. The input of the Pulse shaper is an **exponential voltage signal** obtained from CSP and the output is an **Gaussian voltage pulse**. A Gaussian shape minimizes the noise along with allowing easier digitization.
+
+Our Pulse Shaper Circuit consists of one differentiator (high pass filter) and four integrators (low pass filter), with each of these sperated by a voltage follower in order to not cause any influence on each other. Use of four integrators as compared to one, significantly increases the shaping precision and therefore its recommended. Even 8 integrators may be used but were avoided in order to not further increase the size of circuit. The time constant of the integrators and the differentiators depend on the CSP time constant, and hence on the count rate of radiation. We have kept the sum of time constant of integrator same as that of the differentiator and the CSP. The exact values of capacitors and resistors used for this configuration were obtained after a lot of trial and error, until we were able to obtain optimum shaping. 
+- Time Constant of integrators =
+- Time Constant of differentiator =
+
+The COTS components that we can use to build our Pulse Shaper :
+- UA741 : https://www.ti.com/document-viewer/UA741/datasheet/features-slos0946106#SLOS0946106
+- LM310 : https://circuits-diy.com/wp-content/uploads/2021/01/LM310N.pdf
+- OP07 : https://www.ti.com/document-viewer/OP07/datasheet
