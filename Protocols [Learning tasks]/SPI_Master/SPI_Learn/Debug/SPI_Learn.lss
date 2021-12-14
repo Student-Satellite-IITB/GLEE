@@ -1,0 +1,211 @@
+
+SPI_Learn.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  0000014c  2**0
+                  ALLOC, LOAD, DATA
+  1 .text         000000a4  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      0000002f  00000000  00000000  0000014c  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 00000048  00000000  00000000  0000017b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000b06  00000000  00000000  000001c3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000007fe  00000000  00000000  00000cc9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000002bf  00000000  00000000  000014c7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000074  00000000  00000000  00001788  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    0000027d  00000000  00000000  000017fc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    00000039  00000000  00000000  00001a79  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000038  00000000  00000000  00001ab2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .text         00000004  000000f4  000000f4  00000148  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 12 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00001aec  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .text.USART_Init 00000012  000000c0  000000c0  00000114  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 14 .text.transmit 00000008  000000dc  000000dc  00000130  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 15 .text.receive 00000008  000000e4  000000e4  00000138  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 16 .text.SPI_MasterInit 0000000a  000000d2  000000d2  00000126  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 17 .text.SPI_MasterTransmit 00000008  000000ec  000000ec  00000140  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 18 .text.main    0000001c  000000a4  000000a4  000000f8  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 46 00 	jmp	0x8c	; 0x8c <__ctors_end>
+   4:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+   8:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+   c:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  10:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  14:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  18:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  1c:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  20:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  24:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  28:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  2c:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  30:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  34:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  38:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  3c:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  40:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  44:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  48:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  4c:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  50:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  54:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  58:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  5c:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  60:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  64:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  68:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  6c:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  70:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  74:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  78:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  7c:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  80:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  84:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+  88:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__bad_interrupt>
+
+0000008c <__ctors_end>:
+  8c:	11 24       	eor	r1, r1
+  8e:	1f be       	out	0x3f, r1	; 63
+  90:	cf ef       	ldi	r28, 0xFF	; 255
+  92:	d0 e1       	ldi	r29, 0x10	; 16
+  94:	de bf       	out	0x3e, r29	; 62
+  96:	cd bf       	out	0x3d, r28	; 61
+  98:	0e 94 52 00 	call	0xa4	; 0xa4 <_etext>
+  9c:	0c 94 50 00 	jmp	0xa0	; 0xa0 <_exit>
+
+000000a0 <_exit>:
+  a0:	f8 94       	cli
+
+000000a2 <__stop_program>:
+  a2:	ff cf       	rjmp	.-2      	; 0xa2 <__stop_program>
+
+Disassembly of section .text:
+
+000000f4 <__bad_interrupt>:
+  f4:	0c 94 00 00 	jmp	0	; 0x0 <__TEXT_REGION_ORIGIN__>
+
+Disassembly of section .text.USART_Init:
+
+000000c0 <USART_Init>:
+#define MYUBRR F_CPU/16/BAUD-1
+#include <util/delay.h>
+
+void USART_Init(unsigned int ubrr)
+{
+	UBRR0H = (unsigned int)(ubrr>>8);
+  c0:	90 93 90 00 	sts	0x0090, r25	; 0x800090 <__TEXT_REGION_LENGTH__+0x7e0090>
+	UBRR0L = (unsigned int)ubrr;
+  c4:	89 b9       	out	0x09, r24	; 9
+	
+	UCSR0B = (1<<RXEN0)|(1<<TXEN0);
+  c6:	88 e1       	ldi	r24, 0x18	; 24
+  c8:	8a b9       	out	0x0a, r24	; 10
+	
+	UCSR0C = (0<<USBS) | (3<<UCSZ0);
+  ca:	86 e0       	ldi	r24, 0x06	; 6
+  cc:	80 93 95 00 	sts	0x0095, r24	; 0x800095 <__TEXT_REGION_LENGTH__+0x7e0095>
+  d0:	08 95       	ret
+
+Disassembly of section .text.transmit:
+
+000000dc <transmit>:
+}
+void transmit(unsigned char data)
+{
+	while( !(UCSR0A & (1<<UDRE))){
+  dc:	5d 9b       	sbis	0x0b, 5	; 11
+  de:	fe cf       	rjmp	.-4      	; 0xdc <transmit>
+		;
+	}
+	UDR0 = data;
+  e0:	8c b9       	out	0x0c, r24	; 12
+  e2:	08 95       	ret
+
+Disassembly of section .text.receive:
+
+000000e4 <receive>:
+}
+
+unsigned char receive()
+{
+	while( !(UCSR0A & (1<<RXC))){
+  e4:	5f 9b       	sbis	0x0b, 7	; 11
+  e6:	fe cf       	rjmp	.-4      	; 0xe4 <receive>
+		;
+	}
+	return UDR0;
+  e8:	8c b1       	in	r24, 0x0c	; 12
+}
+  ea:	08 95       	ret
+
+Disassembly of section .text.SPI_MasterInit:
+
+000000d2 <SPI_MasterInit>:
+
+void SPI_MasterInit(void)
+{
+	DDRB = (1<<DDB2)|(1<<DDB1)|(1<<DDB0);
+  d2:	87 e0       	ldi	r24, 0x07	; 7
+  d4:	87 bb       	out	0x17, r24	; 23
+	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
+  d6:	81 e5       	ldi	r24, 0x51	; 81
+  d8:	8d b9       	out	0x0d, r24	; 13
+  da:	08 95       	ret
+
+Disassembly of section .text.SPI_MasterTransmit:
+
+000000ec <SPI_MasterTransmit>:
+}
+
+void SPI_MasterTransmit(char data)
+{
+	SPDR = data;
+  ec:	8f b9       	out	0x0f, r24	; 15
+	while(!(SPSR & (1<<SPIF)))
+  ee:	77 9b       	sbis	0x0e, 7	; 14
+  f0:	fe cf       	rjmp	.-4      	; 0xee <SPI_MasterTransmit+0x2>
+		;
+}
+  f2:	08 95       	ret
+
+Disassembly of section .text.main:
+
+000000a4 <main>:
+
+int main(void)
+{
+	USART_Init(MYUBRR);
+  a4:	83 e3       	ldi	r24, 0x33	; 51
+  a6:	90 e0       	ldi	r25, 0x00	; 0
+  a8:	0e 94 60 00 	call	0xc0	; 0xc0 <USART_Init>
+	SPI_MasterInit();
+  ac:	0e 94 69 00 	call	0xd2	; 0xd2 <SPI_MasterInit>
+	unsigned char msg;
+	while(1){
+		msg = receive();
+  b0:	0e 94 72 00 	call	0xe4	; 0xe4 <receive>
+		
+		SPI_MasterTransmit(msg);
+  b4:	0e 94 76 00 	call	0xec	; 0xec <SPI_MasterTransmit>
+		transmit(SPDR);
+  b8:	8f b1       	in	r24, 0x0f	; 15
+  ba:	0e 94 6e 00 	call	0xdc	; 0xdc <transmit>
+  be:	f8 cf       	rjmp	.-16     	; 0xb0 <main+0xc>
