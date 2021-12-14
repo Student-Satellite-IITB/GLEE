@@ -49,9 +49,12 @@ int main(void)
 	USART_Init(MYUBRR);
 	unsigned char msg;
 	SPI_SlaveInit();
+	msg = 'x';
 	while(1){
-	msg = SPI_SlaveReceive();
-	transmit(msg);}
+		SPDR = msg;
+		msg = SPI_SlaveReceive();
+		transmit(msg);
+		}
 }
 
 

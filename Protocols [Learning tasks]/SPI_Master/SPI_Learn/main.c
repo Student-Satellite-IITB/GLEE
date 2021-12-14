@@ -49,8 +49,11 @@ int main(void)
 	SPI_MasterInit();
 	unsigned char msg;
 	while(1){
-	msg = receive();
-	SPI_MasterTransmit(msg);}
+		msg = receive();
+		
+		SPI_MasterTransmit(msg);
+		transmit(SPDR);
+	}
 }
 
 
