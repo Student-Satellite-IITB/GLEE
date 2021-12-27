@@ -79,37 +79,37 @@ const registerDefaultValues optimumValues[] =
 	{RegFifoTxBaseAddr,			0x??},		//
 	{RegFifoRxBaseaddr,			0x??},		//
 	//{RegFifoRxCurrentAddr,		0x??},		//
-	{ReggIrqFlagsMask,			0x00},		//default value  - Interrupt registers
-	{RegIrqFlags,				0x00},		//default value  - Interrupt registers
+	//{ReggIrqFlagsMask,			0x00},		//default value  - Interrupt registers
+	//{RegIrqFlags,					0x00},		//default value  - Interrupt registers
 	//{RegRxNbBytes,				0x??},		//
-	//{RegRxHeaderCntValueMsb,	0x??},		//
-	//{RegRxHeaderCntValueLsb,	0x??},		//
-	{RegRxPacketCntValueMsb,	0x??},		//
-	//{RegRxPacketCntValueLsb,	0x??},		//
+	//{RegRxHeaderCntValueMsb,		0x??},		//
+	//{RegRxHeaderCntValueLsb,		0x??},		//
+	//{RegRxPacketCntValueMsb,		0x00},		//default value  - Interrupt registers
+	//{RegRxPacketCntValueLsb,		0x??},		//
 	//{RegModemStat,				0x??},		//
-	//{RegPktSnrValue,			0x??},		//
-	//{RegPktRssiValue,			0x??},		//
+	//{RegPktSnrValue,				0x??},		//
+	//{RegPktRssiValue,				0x??},		//
 	//{RegRssiValue,				0x??},		//
 	//{RegHopChannel,				0x??},		//
-	{RegModemConfig1,			0x??},		//
-	{RegModemConfig2,			0x??},		//
-	{RegSymbTimeoutLsb,			0x??},		//
-	{RegPreambleMsb,			0x??},		//
-	{RegPreambleLsb,			0x??},		//
-	{RegPayloadLength,			0x??},		//
-	{RegMaxPayloadLength,		0x??},		//
-	{RegHopPeriod,				0x??},		//
+	{RegModemConfig1,			0x0E},		//BW = 125kHz, CR=4/5, Implicit Header, CRC on, Data Rate..??
+	{RegModemConfig2,			0x6C},		//SF = 6 = 64 chips/symbol, LNA gain - AGC loop ?, RX timeout MSB = 0..  
+	//{RegSymbTimeoutLsb,			0x??},		//Not valid in RX continuous mode
+	//{RegPreambleMsb,				0x??},		//Not valid in implicit header mode
+	//{RegPreambleLsb,				0x??},		//Not valid in implicit header mode
+	{RegPayloadLength,			0x01},		//Expected payload length ????
+	{RegMaxPayloadLength,		0xFF},		//Max. payload length after which header CRC error will arise 
+	{RegHopPeriod,				0x00},		//No frequency hopping
 	//{RegFifoRxByteAddr,			0x??},		//
 	//{RegFeiMsb,					0x??},		//
 	//{RegFeiMid,					0x??},		//
 	//{RegFeiLsb,					0x??},		//
 	//{RegRssiWideband,			0x??},		//
-	{RegDetectOptimize,			0x??},		//
-	{RegInvertIQ,				0x??},		//
-	{RegDetectionThreshold,		0x??},		//
-	{RegSyncWord,				0x??},		//
-	{RegInvertIQ2,				0x??},		//
-	{RegChirpFilter,			0x??}		//
+	{RegDetectOptimize,			0x??},		//default value ???
+	{RegInvertIQ,				0x26},		//No invert I and Q signals in RX/TX, which is ??
+	{RegDetectionThreshold,		0x0C},		//Detection threshold for SF6
+	{RegSyncWord,				0x12},		//Sync word to match
+	{RegInvertIQ2,				0x1D},		//default value - to be changed when RX invert is set
+	{RegChirpFilter,			0xA0}		//default value ???
 }
 
 #endif /* SX1272_H_ */
