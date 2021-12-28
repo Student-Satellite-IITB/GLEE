@@ -2,7 +2,7 @@
 * SX1272.h
 *
 * Created: 18-12-2021 17:57:09
-*  Author: VATSAL
+*  Author: VATSAL and ADITHYA
 */
 
 
@@ -61,10 +61,10 @@ typedef struct
 {
 	uint8_t		regaddr;
 	uint8_t		regvalue;
-}registerDefaultValues;
+}registerSettings;
 
 
-const registerDefaultValues optimumValues[] =
+const registerSettings optimumValues[] =
 {
 	{RegFifo,					0x00},		//default value - LoRa based FIFO input/output
 	{RegOpMode,					0x01},		//LoRa mode, LoRa registers, Standby mode
@@ -111,5 +111,16 @@ const registerDefaultValues optimumValues[] =
 	{RegInvertIQ2,				0x1D},		//default value - to be changed when RX invert is set
 	{RegChirpFilter,			0xA0}		//default value ???
 }
+
+
+#define SINGLEMODE 0x01
+
+uint8_t receivedData[6];
+
+void sx1272Init();
+void writeRegister(uint8_t address,uint8_t data,int size);
+void readRegister(uint8_t address, int size);
+void transmit(uint8_t data);
+
 
 #endif /* SX1272_H_ */
