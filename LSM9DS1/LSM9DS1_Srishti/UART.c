@@ -1,6 +1,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
-#include "UART.c"
+#include "UART.h"
 #define BAUD_PRESCALE (((F_CPU / (USART_BAUDRATE * 16UL))) - 1)
 
 void UART_init(long USART_BAUDRATE)
@@ -12,8 +12,8 @@ void UART_init(long USART_BAUDRATE)
 }
 unsigned char UART_RxChar()
 {
-	while ((UCSR1A & (1 << RXC1)) == 0);/* Wait till data is received */
-	return(UDR1);		/* Return the byte */
+	while ((UCSR1A & (1 << RXC1)) == 0);	/* Wait till data is received */
+	return(UDR1);				/* Return the byte */
 }
 void UART_TxChar(char ch)
 {
