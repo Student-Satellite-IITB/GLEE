@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "I2C.c"
 #include "LSM9DS1.c"
+#include "UART.c"
 
 void configure_ext_interrupt(){
 	EIMSK|=(1<<INT0);						//Enable INT0
@@ -39,6 +40,12 @@ int main(void)
 		
 		if(data_available) {
 		   read_acc(); 						//Acc data gets stored in Ax, Ay, Az
+		   UART_transmit(Ax);
+		   UART_transmit(Ax>>8);
+		   UART_transmit(Ay);
+		   UART_transmit(Ay>>8);
+		   UART_transmit(Az);
+		   UART_transmit(Az>>8);
 	   	}
 	}
 	
