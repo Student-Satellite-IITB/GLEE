@@ -6,12 +6,12 @@
 #include "LSM9DS1.h"
 #include "I2C.h"
 
-uint8_t read_reg(uint8_t address){
-	uint8_t temp;
+uint8_t read_reg(uint8_t address){			
+	uint8_t temp;					//Variable to store register value
 	I2C_Init();
 	configure_acc(SADW,address);
 	I2C_Repeated_Start(SADR);
-	temp=I2C_Read_Ack;
+	temp=I2C_Read_Ack;				//Obtain register value using I2C
 	I2C_Stop();
 	return temp;
 	
@@ -26,8 +26,8 @@ void write_reg(uint8_t address, uint8_t value){
 
 void acc_init(){
 	
-	write_reg(CTRL_REG5_XL,0x38);		//Accelerometer X,Y,Z output enable
-	write_reg(CTRL_REG6_XL,0x20);		//Output Data Rate=10 Hz, full scale deflection=2g
+	write_reg(CTRL_REG5_XL,0x38);			//Accelerometer X,Y,Z output enable
+	write_reg(CTRL_REG6_XL,0x20);			//Output Data Rate=10 Hz, full scale deflection=2g
 }
 
 void FIFO_init(){
@@ -58,7 +58,7 @@ void configure_interrupt(){
 uint8_t FIFO_full(){
 	
 	uint8_t status = read_reg(FIFO_SRC);
-	
+							//Returns 1 if FIFO buffer is full, else returns 0
 	if(status==0xE0) return 1;
 	else return 0;
 	
@@ -66,8 +66,8 @@ uint8_t FIFO_full(){
 
 void read_acc(){
 	
-	Ax=(read_reg(OUT_X_H_XL)<<8)|(read_reg(OUT_X_L_XL));
-	Ay=(read_reg(OUT_Y_H_XL)<<8)|(read_reg(OUT_Y_L_XL));
+	Ax=(read_reg(OUT_X_H_XL)<<8)|(read_reg(OUT_X_L_XL));			//Variables Ax, Ay, Az are used to store 16 bit data values
+	Ay=(read_reg(OUT_Y_H_XL)<<8)|(read_reg(OUT_Y_L_XL));			
 	Az=(read_reg(OUT_Z_H_XL)<<8)|(read_reg(OUT_Z_L_XL));
 }
 
