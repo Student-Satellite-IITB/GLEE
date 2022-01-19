@@ -46,10 +46,18 @@ void initTransceiver(void){
 		writeRegister(optimumValues[i].regaddr,optimumValues[i].regvalue,SINGLEMODE);
 	}
 }
+//payload sent 1 byte for now
 void transmit(uint8_t data){
+	//changing mode to stand-by
+	changeMode(STDBY);
+	writeRegister(RegFifoAddrPtr,RegFifoTxBaseAddr);
+	//Tx init
+	PORTB|=1<<PORTB0;  //assuming RX-TX pin connected to pb0
 	
+	writeRegister(RegPayloadLength,1);
+	//writing data to fifo
+	writeRegister(RegFifoTxBaseAddr,data);
 }
-
 
 
 
