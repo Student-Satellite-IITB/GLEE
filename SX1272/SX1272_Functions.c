@@ -48,15 +48,19 @@ void initTransceiver(void){
 }
 //payload sent 1 byte for now
 void transmit(uint8_t data){
-	//changing mode to stand-by
+		//changing mode to stand-by
 	changeMode(STDBY);
 	writeRegister(RegFifoAddrPtr,RegFifoTxBaseAddr);
 	//Tx init
-	PORTB|=1<<PORTB0;  //assuming RX-TX pin connected to pb0
+	writeRegister(RegPayloadLength,6);
 	
-	writeRegister(RegPayloadLength,1);
 	//writing data to fifo
-	writeRegister(RegFifoTxBaseAddr,data);
+	for(int i=0;i<6;i++){
+	writeRegister(RegFifoTxBaseAddr,testData[i]);
+	_delay_us(5);
+	}
+	//change mode to tx
+	changeMode(TXMODE);
 }
 
 
