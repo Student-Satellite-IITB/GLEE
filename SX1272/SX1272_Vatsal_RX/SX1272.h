@@ -9,6 +9,7 @@
 #ifndef SX1272_H_
 #define SX1272_H_
 
+/*
 // Register address
 
 #define RegFifo					0x00		//
@@ -55,25 +56,26 @@
 #define RegSyncWord				0x39		//
 #define RegInvertIQ2			0x3B		//
 #define RegChirpFilter			0x3D		//
+*/
 
 //initial register values
 typedef struct
 {
-	uint8_t		regaddr;
-	uint8_t		regvalue;
+	uint8_t		registerAddress;
+	uint8_t		registerValue;
 }registerSettings;
 
 const registerSettings sx1272InitSettings[] =
 {
-	{0x81,		0x00},		//OpMode:		Sleep mode
-	{0x81,		0x80},		//OpMode:		Lora mode
-	{0x81,		0x81},		//OpMode:		Lora with standby
+	{0x81,		0x00},		//OpMode:			Sleep mode
+	{0x81,		0x80},		//OpMode:			Lora mode
+	{0x81,		0x81},		//OpMode:			Lora with standby
 	
-	{0x89,		0x8F},		//PaConfig:		Output power limited to 20 dB
-	{0x8A,		0x19},		//PaRamp:		Default
+	{0x89,		0x8F},		//PaConfig:			Output power limited to 20 dB
+	{0x8A,		0x19},		//PaRamp:			Default
 	
-	{0x8B,		0x2B},		//Ocp:		Default
-	{0x8C,		0x23},		//Lna:		Lna boost on 150% LNA current
+	{0x8B,		0x2B},		//Ocp:				Default
+	{0x8C,		0x23},		//Lna:				Lna boost on 150% LNA current
 	
 	{0x9D,		0x27},		//ModemConfig1:		BW=125kHz, Coding rate 4/8, implicit, CRC on
 	{0x9E,		0xB4},		//ModemCongig2:		SF=11, single TX
@@ -82,7 +84,7 @@ const registerSettings sx1272InitSettings[] =
 	{0xA0,		0x00},		//PreambleMsb:
 	{0xA1,		0x08},		//PreambleLsb:
 		
-	{0xA2,		0x0A},		//PayloadLength:		10 Bytes
+	{0xA2,		0x0A},		//PayloadLength:	10 Bytes
 	{0xA3,		0xFF},		//MaxPayloafLength:
 	{0xA4,		0x00},		//HopPeriod:		???
 		
@@ -91,7 +93,7 @@ const registerSettings sx1272InitSettings[] =
 	{0xB7,		0x0A}		//DetectionThreshold:	SF7 to SF12
 };
 
-const registerSettings TXSettings[] = 
+const registerSettings registerTxSettings[] = 
 {
 	{0x81,		0x81},		//OpMode:			LoRa StandBy Mode
 	{0x8D,		0x00},		//FifoAddrPtr:		FiFo data buffer location		
@@ -100,7 +102,7 @@ const registerSettings TXSettings[] =
 	{0x81,		0x83}		//OpMode:			TX mode on!!
 };
 
-const registerSettings RXSettings[] =
+const registerSettings registerRxSettings[] =
 {
 	{0x81,		0x81},		//OpMode:			LoRa StandBy Mode
 	{0x8D,		0x00},		//FifoAddrPtr:		FiFo data buffer location
@@ -109,6 +111,7 @@ const registerSettings RXSettings[] =
 	{0x81,		0x85}		//OpMode:			RX continuous mode on!!
 };
 
+/*
 const registerSettings optimumValues[] =
 {
 	{RegFifo,					0x00},		//default value - LoRa based FIFO input/output
@@ -156,16 +159,17 @@ const registerSettings optimumValues[] =
 	{RegInvertIQ2,				0x1D},		//default value - to be changed when RX invert is set
 	{RegChirpFilter,			0xA0}		//default value ???
 }
+*/
 
-#define SINGLEMODE 0x01
+#define SINGLE_MODE 0x01
 
 uint8_t receivedData[10];
 
 void sx1272Init();
-void writeRegister(uint8_t address,uint8_t data,int size);
-void readRegister(uint8_t address, int size, int start = 0);
-void sendTXFIFO(uint8_t data[]);
-void getRXFIFO();
+void writeRegister(uint8_t address,uint8_t data,uint8_t size);
+void readRegister(uint8_t address, uint8_t size, uint8_t start = 0);
+void sendTxFIFO(uint8_t data[]);
+void getRxFIFO();
 
 
 #endif /* SX1272_H_ */

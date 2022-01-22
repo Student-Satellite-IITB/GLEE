@@ -9,17 +9,15 @@
 #include "SX1272.h"
 #include "SPI.h"
 
-//assuming the size of optimumValues to be 10
-//if size=1, single access, else burst/FIFO access
 
-void sx1272Init(){
-	uint8_t settingslength = sizeof(sx1272InitSettings)/sizeof(registerSettings);
-	for(int i=0; i<settingslength; i++){
-		writeRegister(sx1272InitSettings[i].regaddr, sx1272InitSettings[i].regvalue, SINGLEMODE);
+void sx1272Init(){																	//initialize the transceiver with the optimum register values
+	uint8_t settingsLength = sizeof(sx1272InitSettings)/sizeof(registerSettings);
+	for(int i=0; i<settingsLength; i++){
+		writeRegister(sx1272InitSettings[i].registerAddress, sx1272InitSettings[i].registerValue, SINGLE_MODE);
 	}
 }
 
-void writeRegister(uint8_t address,uint8_t data,int size){
+void writeRegister(uint8_t address,uint8_t data, uint8_t size){						//address of register to write, data to write, size of data
 	spiMastInit();
 	spiMastTrans(address);					// 1 - write, 0 - read + 7 bit address
 	for(int i=0; i<size; i++){
@@ -28,7 +26,7 @@ void writeRegister(uint8_t address,uint8_t data,int size){
 	stopSPI();
 }
 
-void readRegister(uint8_t address, int size, int start = 0){
+void readRegister(uint8_t address, uint8_t size, uint8_t start = 0){		//address of register to read from, size of data to be read, the i'th data reading foe index
 	// int receivedData[size];
 	spiMastInit();
 	spiMastTrans(address);					// 1 - write, 0 - read + 7 bit address
@@ -39,35 +37,35 @@ void readRegister(uint8_t address, int size, int start = 0){
 	// return receivedData;
 }
 
-void getRXFIFO(){
+void getRxFIFO(){
 	
 	for(int i = 0; i<5; i++){														// Initial RX settings
-		writeRegister(RXSettings[i].regaddr, RXSettings[i].regvalue, SINGLEMODE);
+		writeRegister(registerRxSettings[i].registerAddress, registerRxSettings[i].registerValue, SINGLE_MODE);
 	}
 		
 	while((receivedData[0] & 0x40) != 1){						//Check if RX is done or not
-		readRegister(0x12, SINGLEMODE);
+		readRegister(0x12, SINGLE_MODE);
 	}
 	
 	for(int i = 0; i<10; i++){									//Read all values and store them in an array
-		readRegister(0x00, SINGLEMODE, i);
+		readRegister(0x00, SINGLE_MODE, i);
 	}
 }
 
-void sendTXFIFO(uint8_t data[]){
+void sendTxFIFO(uint8_t data[]){
 	
 	for(int i = 0; i<4; i++){														// Initial TX settings
-		writeRegister(TXSettings[i].regaddr, TXSettings[i].regvalue, SINGLEMODE);
+		writeRegister(registerTxSettings[i].registerAddress, registerTxSettings[i].registerValue, SINGLE_MODE);
 	}
 	
 	for(int i = 0; i<10; i++){						//Sending sample data to FIFO data register
-		writeRegister(0x80, data[i], SINGLEMODE);
+		writeRegister(0x80, data[i], SINGLE_MODE);
 	}
 	
-	writeRegister(TXSettings[4].regaddr, TXSettings[4].regvalue, SINGLEMODE);		//Turn on TX mode
+	writeRegister(registerTxSettings[4].registerAddress, registerTxSettings[4].registerValue, SINGLE_MODE);		//Turn on TX mode
 	
 	while((receivedData[0] & 0x08) != 1){						//Check if TX is done or not
-		readRegister(0x12, SINGLEMODE);
+		readRegister(0x12, SINGLE_MODE);
 	}
 }
 

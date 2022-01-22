@@ -14,21 +14,20 @@
 
 int main(void)
 {
-	spiMastInit();
+	spiMastInit();		//initialize master SPI mode
 	
-	sei();
+	sei();				//enable global interrupts
 	
-	sx1272Init();
+	sx1272Init();		//initialize transceiver
 	
 	//testing data
 	//uint8_t testData[6] = [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A];
 	
-	//FIFO transmit
-	getRXFIFO();
+	getRxFIFO();		//receive the data and store it on variable
 	
-	DDRD = 0xFF;
+	DDRD = 0xFF;		//Register D as output
 	
-	for(int i = 0; i<10; i++){
+	for(int i = 0; i<10; i++){		//display the received values on pins of PORT D
 		PORTD = receivedData[i];
 		_delay_ms(500);
 	}
