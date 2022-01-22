@@ -15,17 +15,15 @@
 
 int main(void)
 {
-	spiMastInit();
+	spiMastInit();		//initialize SPI master mode
 	
-	sei();
+	sei();				//enable global interrupts
 	
-	sx1272Init();		
+	sx1272Init();		//initialize transceiver with optimum register values
 	
-	//testing data
-	uint8_t testData[6] = [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A];
+	uint8_t testData[6] = [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A];		//test data
 	
-	//FIFO transmit
-	sendTXFIFO(testData);
+	sendTxFIFO(testData);		////FIFO transmit of data
 	
 	while (1) {}
 	return 0;

@@ -13,7 +13,7 @@
 void spiMastInit(void){
 	DDRB |= (1 << DDB3) | (1 << DDB5) | (1 << DDB2); DDRB &= ~(1 << DDB4);	// In portB, setting MOSI, SCK and SS resp. as output, MISO disable
 	PORTB &= ~ (1 << 2); 													//enable slave select pin PB2
-	SPCR |= (1 << SPE) | (1 << MSTR) | (1 << SPR0) | (1 << SPIE);		//enable SPI,  set as master,  set SCK Fq as Fosc/16, //enable local interrupt
+	SPCR |= (1 << SPE) | (1 << MSTR) | (1 << SPR0) | (1 << SPIE);			//enable SPI,  set as master,  set SCK Fq as Fosc/16, //enable local interrupt
 }
 
 
