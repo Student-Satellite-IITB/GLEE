@@ -1,0 +1,9 @@
+This folder contains file for processing ALSEP data. 
+
+Current, files:
+
+readme.txt: A modified version of https://data.darts.isas.jaxa.jp/pub/apollo/pse/software/alsep_tools/readme.txt for reading the data files.
+
+pse.a11.1.1: Raw data file for passive seismic events recorded by Apollo 11. https://data.darts.isas.jaxa.jp/pub/apollo/pse/p11s/ 
+
+pse_a11.txt: .txt file that can si extracted from above data file. This can be parsed and data processed further. 
