@@ -1,6 +1,6 @@
 This folder contains file for processing ALSEP data. 
 
-Current, files:
+Current files:
 
 readme.txt: A modified version of https://data.darts.isas.jaxa.jp/pub/apollo/pse/software/alsep_tools/readme.txt for reading the data files.
 
