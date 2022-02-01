@@ -1,0 +1,74 @@
+/run/verbose 2
+/run/initialize
+/control/execute vis.mac
+/vis/open OGL
+/vis/sceneHandler/create OGL
+/vis/viewer/create ! ! 600
+/vis/viewer/refresh
+/vis/viewer/set/autoRefresh false
+/vis/verbose errors
+/vis/drawVolume
+/vis/scene/create
+/vis/scene/add/volume world -1 -1 none m 0 0 0 0 0 0
+/vis/sceneHandler/attach
+/vis/viewer/set/viewpointVector -1 0 0
+/vis/viewer/set/lightsVector -1 0 0
+/vis/viewer/set/style wireframe
+/vis/viewer/set/auxiliaryEdge true
+/vis/viewer/set/lineSegmentsPerCircle 100
+/vis/scene/add/trajectories smooth
+/tracking/storeTrajectory 2
+/vis/scene/notifyHandlers
+/vis/modeling/trajectories/create/drawByCharge
+/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
+/vis/scene/notifyHandlers scene-0
+/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 2
+/vis/scene/notifyHandlers scene-0
+/vis/scene/add/hits
+/vis/scene/notifyHandlers
+/vis/scene/endOfEventAction accumulate
+/vis/geometry/set/forceLineSegmentsPerCircle World 0 25
+/vis/scene/notifyHandlers
+/vis/scene/add/axes 0 0 0 12 cm
+/vis/scene/notifyHandlers
+/vis/viewer/set/autoRefresh true
+/vis/viewer/refresh
+/vis/verbose warnings
+/gps/verbose 0
+/gps/particle gamma
+/gps/direction 0 0 1
+/gps/pos/type Plane
+/gps/pos/shape Rectangle
+/gps/pos/halfx 1 cm
+/gps/pos/halfy 1 cm
+/gps/pos/centre 0. 0. 0.
+/gps/energy 500 keV
+/control/execute icons.mac
+/gui/addIcon "Open macro file" open /control/execute
+/gui/addIcon "Save viewer state" save /vis/viewer/save
+/gui/addIcon "Move" move
+/gui/addIcon "Pick" pick
+/gui/addIcon "Zoom out" zoom_out
+/gui/addIcon "Zoom in" zoom_in
+/gui/addIcon "Rotate" rotate
+/gui/addIcon "Hidden line removal" hidden_line_removal
+/gui/addIcon "Hidden line and hidden surface removal" hidden_line_and_surface_removal
+/gui/addIcon "Surfaces" solid
+/gui/addIcon "Wireframe" wireframe
+/gui/addIcon "Perspective" perspective
+/gui/addIcon "Orthographic" ortho
+/gui/addIcon "Run beam on" user_icon "/run/beamOn 1" run.png
+/run/beamOn 500
+/vis/scene/notifyHandlers scene-0
+/vis/viewer/set/picking false
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+/vis/viewer/refresh
+/vis/viewer/set/picking false
+/vis/viewer/refresh
