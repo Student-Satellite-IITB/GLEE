@@ -1,0 +1,20 @@
+# Macro file for example ED
+# 
+# Can be run in batch, without graphic
+# or interactively: Idle> /control/execute run1.mac
+#
+#/control/cout/setCoutFile verbose.txt
+#/run/numberOfThreads 8
+#/random/setSeeds 1625315918 3
+/run/initialize
+#
+
+/control/verbose 0
+/tracking/verbose 0
+/event/verbose 0
+
+
+/gps/verbose 0
+/gps/particle gamma
+
+/run/beamOn 200
