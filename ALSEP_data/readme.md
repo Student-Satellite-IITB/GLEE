@@ -1,4 +1,4 @@
-This folder contains file for processing ALSEP data. 
+This folder contains files for processing ALSEP data. 
 
 Current files:
 
