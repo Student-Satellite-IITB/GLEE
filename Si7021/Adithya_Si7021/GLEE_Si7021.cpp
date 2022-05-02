@@ -9,7 +9,7 @@
 #include <avr/io.h>
 #include <stdbool.h>
 #include "GLEE_Si7021.h"
-#include "I2C.h"
+#include "GLEE_I2C.h"
 
 
 // check whether it is si7021 using EID
