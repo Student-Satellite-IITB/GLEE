@@ -8,7 +8,7 @@
 #include <util/delay.h>
 #include <avr/io.h>
 #include <stdbool.h>
-#include "Si7021.h"
+#include "GLEE_Si7021.h"
 #include "I2C.h"
 
 
